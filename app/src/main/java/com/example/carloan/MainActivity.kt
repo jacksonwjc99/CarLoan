@@ -31,16 +31,16 @@ class MainActivity : AppCompatActivity() {
         val intPeriod = findViewById<EditText>(R.id.editTextLoanPeriod).text.toString().toInt()
 
         val carLoan = carPrice - downPayment;
-        val interest = (carPrice * carInterest) * intPeriod;
+        val interest = (carLoan * carInterest) * intPeriod;
         val monthlyRepay = ((carLoan + interest) / intPeriod) / 12;
 
         val string: String = getString(R.string.loan)
         val string1: String = getString(R.string.interest)
         val string2: String = getString(R.string.monthly_repayment)
 
-        textViewLoan.text = string + " RM" + carLoan;
-        textViewInterest.text = string1 + " RM" + interest;
-        textViewMonthlyRepayment.text = string2 + " RM" + monthlyRepay;
+        textViewLoan.text = string + " RM" + String.format("%.2f", carLoan).toDouble();
+        textViewInterest.text = string1 + " RM" + String.format("%.2f", interest).toDouble();
+        textViewMonthlyRepayment.text = string2 + " RM" + String.format("%.2f", monthlyRepay).toDouble();
     }
 
     private fun reset(view: View){

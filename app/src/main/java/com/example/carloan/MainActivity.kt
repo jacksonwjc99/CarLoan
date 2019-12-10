@@ -25,22 +25,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun calcCarLoan(view: View){
-        val carPrice = findViewById<EditText>(R.id.editTextCarPrice).text.toString().toInt()
-        val downPayment = findViewById<EditText>(R.id.editTextDownPayment).text.toString().toInt()
+        val carPrice = findViewById<EditText>(R.id.editTextCarPrice).text.toString().toDouble()
+        val downPayment = findViewById<EditText>(R.id.editTextDownPayment).text.toString().toDouble()
         val carInterest = findViewById<EditText>(R.id.editTextInterestRate).text.toString().toDouble()
-        val intPeriod = findViewById<EditText>(R.id.editTextLoanPeriod).text.toString().toInt()
+        val intPeriod = findViewById<EditText>(R.id.editTextLoanPeriod).text.toString().toDouble()
 
         val carLoan = carPrice - downPayment;
-        val interest = (carLoan * carInterest) * intPeriod;
+        val interest = (carLoan * (carInterest/100)) * intPeriod;
         val monthlyRepay = ((carLoan + interest) / intPeriod) / 12;
 
         val string: String = getString(R.string.loan)
         val string1: String = getString(R.string.interest)
         val string2: String = getString(R.string.monthly_repayment)
 
-        textViewLoan.text = string + " RM" + String.format("%.2f", carLoan).toDouble();
-        textViewInterest.text = string1 + " RM" + String.format("%.2f", interest).toDouble();
-        textViewMonthlyRepayment.text = string2 + " RM" + String.format("%.2f", monthlyRepay).toDouble();
+        textViewLoan.text = string + " RM" + String.format("%.2f", carLoan);
+        textViewInterest.text = string1 + " RM" + String.format("%.2f", interest);
+        textViewMonthlyRepayment.text = string2 + " RM" + String.format("%.2f", monthlyRepay);
     }
 
     private fun reset(view: View){
